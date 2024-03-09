@@ -5,20 +5,27 @@
 
 ## Алгоритм запуска
 - Склонируйте репозиторий:
+
 '''
+
 git clone git@github.com:oleffr/ConvertOS.git
+
 '''
+
 - Введите последовательно команды:
+
 '''
+
 as --32 -o bootsect.o bootsect.asm
 ld -Ttext 0x7c00 --oformat binary -m elf_i386 -o bootsect.bin bootsect.o
 g++ -ffreestanding -m32 -o kernel.o -c kernel.cpp
 ld --oformat binary -Ttext 0x10000 -o kernel.bin --entry=kmain -m elf_i386 kernel.o
 qemu –fda bootsect.bin –fdb kernel.bin
+
 '''
 
 ## Описание ОС
-> Поддерживаемые ОС команды:
+Поддерживаемые ОС команды:
 - info
 > Выводит информацию об авторе и средствах разработки ОС (транслятор ассемблера,
 компилятор), параметры загрузчика — выбранный пользователем цвет шрифта консоли
